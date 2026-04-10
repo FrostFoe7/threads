@@ -71,9 +71,9 @@ export function ActivityItem({ activity }: ActivityItemProps) {
 
   return (
     <div className="flex items-start gap-3 py-4 border-b last:border-0">
-      <div className="relative">
+      <div className="relative shrink-0">
         <Link href={`/u/${activity.actor.username}`}>
-          <Avatar className="w-10 h-10 ring-1 ring-border ring-offset-2">
+          <Avatar className="w-10 h-10 ring-1 ring-border ring-offset-2 shrink-0">
             <AvatarImage src={activity.actor.avatarUrl} alt={activity.actor.username} />
             <AvatarFallback>{activity.actor.username.slice(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
@@ -91,15 +91,15 @@ export function ActivityItem({ activity }: ActivityItemProps) {
           <Link href={`/u/${activity.actor.username}`} className="font-semibold hover:underline truncate">
             {activity.actor.username}
           </Link>
-          <time className="text-muted-foreground ml-1">
+          <time className="text-muted-foreground ml-1 whitespace-nowrap">
              {formatDistanceToNow(new Date(activity.createdAt), { addSuffix: false })}
           </time>
         </div>
-        <p className="text-[15px] text-muted-foreground leading-snug">
+        <p className="text-[15px] text-muted-foreground leading-snug truncate">
            {getText()}
         </p>
         {activity.content && (
-           <p className="text-[15px] mt-1 line-clamp-2 text-foreground">
+           <p className="text-[15px] mt-1 line-clamp-2 text-foreground break-words">
              {activity.content}
            </p>
         )}

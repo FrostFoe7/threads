@@ -8,13 +8,20 @@ import {
   MusicNotes, 
   SpeakerHigh, 
   SpeakerX,
-  DotsThreeVertical
+  DotsThreeVertical,
+  Warning,
+  EyeSlash,
+  UserMinus,
+  Link as LinkIcon,
+  QrCode,
+  Info
 } from "@phosphor-icons/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Reel } from "@/types/types";
 import { useReelStore } from "@/hooks/use-reel-store";
 import { cn } from "@/lib/utils";
+import { ActionMenu } from "@/components/ui/action-menu";
 
 interface ReelPlayerProps {
   reel: Reel;
@@ -25,6 +32,15 @@ export function ReelPlayer({ reel, isActive }: ReelPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { isMuted, toggleMute } = useReelStore();
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const reelItems = [
+    { label: "Share to...", icon: PaperPlaneTilt, onClick: () => console.log("Share") },
+    { label: "Copy link", icon: LinkIcon, onClick: () => console.log("Copy link") },
+    { label: "QR code", icon: QrCode, onClick: () => console.log("QR Code") },
+    { label: "Mute", icon: EyeSlash, onClick: () => console.log("Mute") },
+    { label: "Not interested", icon: Info, onClick: () => console.log("Not interested") },
+    { label: "Report", icon: Warning, destructive: true, onClick: () => console.log("Report") },
+  ];
 
   useEffect(() => {
     if (!videoRef.current) return;
@@ -64,7 +80,7 @@ export function ReelPlayer({ reel, isActive }: ReelPlayerProps) {
       />
 
       {/* Overlay Actions */}
-      <div className="absolute right-3 bottom-20 flex flex-col items-center gap-4 text-white z-10">
+      <div className="absolute right-3 bottom-24 flex flex-col items-center gap-4 text-white z-10 md:bottom-20">
         <div className="flex flex-col items-center gap-1">
           <Button variant="ghost" size="icon" className="h-12 w-12 rounded-full bg-black/20 backdrop-blur-sm hover:bg-black/40 text-white border-0">
             <Heart size={28} weight="fill" className="text-white hover:text-red-500 transition-colors" />
@@ -85,9 +101,14 @@ export function ReelPlayer({ reel, isActive }: ReelPlayerProps) {
           </Button>
         </div>
 
-        <Button variant="ghost" size="icon" className="h-12 w-12 rounded-full bg-black/20 backdrop-blur-sm hover:bg-black/40 text-white border-0">
-          <DotsThreeVertical size={24} weight="bold" />
-        </Button>
+        <ActionMenu 
+          items={reelItems}
+          trigger={
+            <Button variant="ghost" size="icon" className="h-12 w-12 rounded-full bg-black/20 backdrop-blur-sm hover:bg-black/40 text-white border-0">
+              <DotsThreeVertical size={24} weight="bold" />
+            </Button>
+          }
+        />
 
         <div className="w-8 h-8 rounded-lg border-2 border-white/80 overflow-hidden animate-spin-slow">
            <img src={reel.author.avatarUrl} alt="Music" className="w-full h-full object-cover" />
@@ -95,7 +116,7 @@ export function ReelPlayer({ reel, isActive }: ReelPlayerProps) {
       </div>
 
       {/* Overlay Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent text-white z-10">
+      <div className="absolute bottom-16 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent text-white z-10 md:bottom-0">
         <div className="flex items-center gap-3 mb-3">
           <Avatar className="w-8 h-8 ring-1 ring-white">
             <AvatarImage src={reel.author.avatarUrl} alt={reel.author.username} />
@@ -107,7 +128,7 @@ export function ReelPlayer({ reel, isActive }: ReelPlayerProps) {
           </Button>
         </div>
 
-        <p className="text-sm mb-4 line-clamp-2 max-w-[80%] leading-relaxed">
+        <p className="text-sm mb-4 line-clamp-2 max-w-[80%] leading-relaxed drop-shadow-sm">
           {reel.content}
         </p>
 

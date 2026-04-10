@@ -74,12 +74,12 @@ export default function PostDetailPage() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="flex items-center gap-4 py-4 sticky top-0 bg-background/80 backdrop-blur-md z-10 border-b md:border-0 mb-2">
+    <>
+      <header className="flex items-center gap-4 py-4 sticky top-0 bg-background/80 backdrop-blur-md z-10 border-b md:border-0 mb-2 -mx-4 md:-mx-8 px-4 md:px-8">
          <Button 
             variant="ghost" 
             size="icon" 
-            className="rounded-full h-10 w-10"
+            className="rounded-full h-10 w-10 -ml-2"
             onClick={() => router.back()}
          >
             <CaretLeft size={24} weight="bold" />
@@ -87,7 +87,7 @@ export default function PostDetailPage() {
          <h1 className="text-xl font-bold">Thread</h1>
       </header>
 
-      <div className="flex flex-col pb-24">
+      <div className="flex flex-col pb-32">
         <PostCard post={MOCK_POST} className="border-none" />
         
         <div className="mt-4 px-1">
@@ -101,13 +101,13 @@ export default function PostDetailPage() {
       </div>
 
       {/* Sticky Reply Bar */}
-      <div className="fixed bottom-16 md:bottom-0 left-0 md:left-64 right-0 p-4 bg-background border-t z-20">
+      <div className="fixed bottom-0 left-0 md:left-64 right-0 p-4 bg-background border-t z-20">
          <div className="max-w-2xl mx-auto flex items-center gap-3">
-            <Avatar className="w-8 h-8">
+            <Avatar className="w-8 h-8 shrink-0">
                <AvatarImage src={MOCK_USER.avatarUrl} alt="Me" />
                <AvatarFallback>ME</AvatarFallback>
             </Avatar>
-            <div className="flex-1 relative">
+            <div className="flex-1 relative min-w-0">
                <Input 
                   placeholder={`Reply to ${MOCK_POST.author.username}...`}
                   className="rounded-full bg-muted border-0 h-11 pr-12 text-sm"
@@ -118,6 +118,6 @@ export default function PostDetailPage() {
             </div>
          </div>
       </div>
-    </div>
+    </>
   );
 }

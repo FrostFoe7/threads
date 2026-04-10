@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Sidebar } from "@/components/features/navigation/sidebar";
-import { BottomNav } from "@/components/features/navigation/bottom-nav";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,12 +26,9 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-background text-foreground">
         <Sidebar />
-        <main className="md:pl-64 pb-16 md:pb-0 min-h-screen">
-          <div className="mx-auto max-w-2xl px-4 md:px-8 py-6">
-            {children}
-          </div>
+        <main className="md:pl-64 min-h-screen">
+          {children}
         </main>
-        <BottomNav />
       </body>
     </html>
   );

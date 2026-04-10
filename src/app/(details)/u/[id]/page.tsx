@@ -36,20 +36,20 @@ export default function OtherProfilePage({ params }: { params: { id: string } })
   const router = useRouter();
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="flex items-center justify-between py-4 sticky top-0 bg-background/80 backdrop-blur-md z-10 border-b md:border-0 mb-2">
+    <>
+      <header className="flex items-center justify-between py-4 sticky top-0 bg-background/80 backdrop-blur-md z-10 border-b md:border-0 mb-2 -mx-4 md:-mx-8 px-4 md:px-8">
          <div className="flex items-center gap-4">
             <Button 
                variant="ghost" 
                size="icon" 
-               className="rounded-full h-10 w-10"
+               className="rounded-full h-10 w-10 -ml-2"
                onClick={() => router.back()}
             >
                <CaretLeft size={24} weight="bold" />
             </Button>
             <span className="font-bold text-sm">{MOCK_OTHER_USER.username}</span>
          </div>
-         <Button variant="ghost" size="icon" className="rounded-full h-10 w-10">
+         <Button variant="ghost" size="icon" className="rounded-full h-10 w-10 -mr-2">
             <DotsThree size={24} weight="bold" />
          </Button>
       </header>
@@ -63,6 +63,6 @@ export default function OtherProfilePage({ params }: { params: { id: string } })
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -54,7 +54,7 @@ export default function ReelsPage() {
   useEffect(() => {
     const observerOptions = {
       root: containerRef.current,
-      threshold: 0.8, // 80% of the reel must be visible to be considered active
+      threshold: 0.8,
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -77,8 +77,7 @@ export default function ReelsPage() {
   return (
     <div 
        ref={containerRef}
-       className="fixed inset-0 md:inset-auto md:relative md:h-[calc(100vh-64px)] md:w-full md:max-w-md md:mx-auto bg-black overflow-y-scroll snap-y snap-mandatory scrollbar-hide"
-       style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+       className="h-screen md:h-[calc(100vh-0px)] w-full md:max-w-[450px] md:mx-auto overflow-y-scroll snap-y snap-mandatory scrollbar-hide"
     >
       {MOCK_REELS.map((reel) => (
         <div key={reel.id} data-reel-id={reel.id} className="h-full w-full snap-start flex-shrink-0">

@@ -114,7 +114,3 @@ export default function ActivityPage() {
     </div>
   );
 }
-
-function cn(...classes: (string | boolean | undefined)[]) {
-  return classes.filter(Boolean).join(" ");
-}
